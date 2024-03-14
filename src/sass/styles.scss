@@ -1,0 +1,56 @@
+@import 'dda';
+@import 'bresenham';
+@import 'circle';
+@import 'srusrd';
+@import 'scale';
+@import 'translation';
+@import 'rotation';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: #ebf5fc;
+}
+
+.l-divisor {
+  display: flex;
+  min-height: 100vh;
+}
+
+.c-menu {
+  background-color: SlateBlue;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 5px 5px 0;
+  min-width: fit-content;
+  &__button {
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: inherit;
+    color: white;
+    &:hover {
+      background-color: DarkSlateBlue;
+    }
+    &--selected {
+      background-color: DarkSlateBlue;
+    }
+  }
+}
+
+.l-view-container {
+  flex: 1;
+}
+
+.js-view {
+  display: none;
+}

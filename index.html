@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/styles/styles.css" />
+    <script type="module" src="./src/scripts/main.js"></script>
+    <title>CG Algorithmss</title>
+  </head>
+  <body>
+    <div class="l-divisor">
+      <nav class="c-menu">
+        <button class="c-menu__button js-menu-item" id="dda">
+          Rasterização DDA
+        </button>
+        <button class="c-menu__button js-menu-item" id="bresenham">
+          Rasterização Bresenham
+        </button>
+        <button class="c-menu__button js-menu-item" id="circle">
+          Rasterização de círculos
+        </button>
+        <button class="c-menu__button js-menu-item" id="srusrd">
+          Mapeamento SRU para SRD
+        </button>
+        <button class="c-menu__button js-menu-item" id="scale">
+          Transformação 2D: Escala
+        </button>
+        <button class="c-menu__button js-menu-item" id="translation">
+          Transformação 2D: Translação
+        </button>
+        <button class="c-menu__button js-menu-item" id="rotation">
+          Transformação 2D: Rotação
+        </button>
+      </nav>
+      <div class="l-view-container">
+        <div class="js-view" id="dda-view">
+          <div class="l-dda-container">
+            <div class="c-dda">
+              <h1 class="c-dda__title">DDA</h1>
+              <form
+                class="c-dda__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="dda-form"
+              >
+                <div class="c-dda__inputs">
+                  <div class="c-dda__point">
+                    <h2 class="c-dda__point-title">Ponto 1</h2>
+                    <div class="c-dda__point-inputs">
+                      <div class="c-dda__form-group">
+                        <label class="c-dda__form-label">X</label>
+                        <input
+                          class="c-dda__input"
+                          type="number"
+                          id="dda-x1"
+                          required
+                          min="0"
+                        />
+                      </div>
+                      <div class="c-dda__form-group">
+                        <label class="c-dda__form-label">Y</label>
+                        <input
+                          class="c-dda__input"
+                          type="number"
+                          id="dda-y1"
+                          required
+                          min="0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-dda__point">
+                    <h2 class="c-dda__point-title">Ponto 2</h2>
+                    <div class="c-dda__point-inputs">
+                      <div class="c-dda__form-group">
+                        <label class="c-circle__form-label">X</label>
+                        <input
+                          class="c-dda__input"
+                          type="number"
+                          id="dda-x2"
+                          required
+                          min="0"
+                        />
+                      </div>
+                      <div class="c-dda__form-group">
+                        <label class="c-circle__form-label">Y</label>
+                        <input
+                          class="c-dda__input"
+                          type="number"
+                          id="dda-y2"
+                          required
+                          min="0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-dda__point">
+                    <h2 class="c-dda__point-title">Resolução</h2>
+                    <div class="c-dda__point-inputs">
+                      <div class="c-dda__form-group">
+                        <input
+                          class="c-dda__input"
+                          type="number"
+                          id="dda-resolution"
+                          required
+                          min="1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="c-dda__submit" type="submit">Calcular</button>
+              </form>
+            </div>
+            <div class="c-dda-canvas">
+              <h1 class="c-dda-canvas__title">Resultado</h1>
+              <canvas id="dda-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="js-view" id="bresenham-view">
+          <div class="l-bresenham-container">
+            <div class="c-bresenham">
+              <h1 class="c-bresenham__title">Bresenham</h1>
+              <form
+                class="c-bresenham__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="bresenham-form"
+              >
+                <div class="c-bresenham__inputs">
+                  <div class="c-bresenham__point">
+                    <h2 class="c-bresenham__point-title">Ponto 1</h2>
+                    <div class="c-bresenham__point-inputs">
+                      <div class="c-bresenham__form-group">
+                        <label class="c-bresenham__form-label">X</label>
+                        <input
+                          class="c-bresenham__input"
+                          type="number"
+                          id="bresenham-x1"
+                          required
+                          min="0"
+                        />
+                      </div>
+                      <div class="c-bresenham__form-group">
+                        <label class="c-bresenham__form-label">Y</label>
+                        <input
+                          class="c-bresenham__input"
+                          type="number"
+                          id="bresenham-y1"
+                          required
+                          min="0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-bresenham__point">
+                    <h2 class="c-bresenham__point-title">Ponto 2</h2>
+                    <div class="c-bresenham__point-inputs">
+                      <div class="c-bresenham__form-group">
+                        <label class="c-circle__form-label">X</label>
+                        <input
+                          class="c-bresenham__input"
+                          type="number"
+                          id="bresenham-x2"
+                          required
+                          min="0"
+                        />
+                      </div>
+                      <div class="c-bresenham__form-group">
+                        <label class="c-circle__form-label">Y</label>
+                        <input
+                          class="c-bresenham__input"
+                          type="number"
+                          id="bresenham-y2"
+                          required
+                          min="0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-bresenham__point">
+                    <h2 class="c-bresenham__point-title">Resolução</h2>
+                    <div class="c-bresenham__point-inputs">
+                      <div class="c-bresenham__form-group">
+                        <input
+                          class="c-bresenham__input"
+                          type="number"
+                          id="bresenham-resolution"
+                          required
+                          min="1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="c-bresenham__submit" type="submit">
+                  Calcular
+                </button>
+              </form>
+            </div>
+            <div class="c-bresenham-canvas">
+              <h1 class="c-bresenham-canvas__title">Resultado</h1>
+              <canvas id="bresenham-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="js-view" id="circle-view">
+          <div class="l-circle-container">
+            <div class="c-circle">
+              <h1 class="c-circle__title">Círculo</h1>
+              <form
+                class="c-circle__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="circle-form"
+              >
+                <div class="c-circle__inputs">
+                  <div class="c-circle__point">
+                    <h2 class="c-circle__point-title">Centro</h2>
+                    <div class="c-circle__point-inputs">
+                      <div class="c-circle__form-group">
+                        <label class="c-circle__form-label">X</label>
+                        <input
+                          class="c-circle__input"
+                          type="number"
+                          id="circle-x"
+                          min="0"
+                          required
+                        />
+                      </div>
+                      <div class="c-circle__form-group">
+                        <label class="c-circle__form-label">Y</label>
+                        <input
+                          class="c-circle__input"
+                          type="number"
+                          id="circle-y"
+                          min="0"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-circle__point">
+                    <h2 class="c-circle__point-title">Raio</h2>
+                    <div class="c-circle__point-inputs">
+                      <div class="c-circle__form-group">
+                        <input
+                          class="c-circle__input"
+                          type="number"
+                          id="circle-radius"
+                          min="1"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-circle__point">
+                    <h2 class="c-circle__point-title">Resolução</h2>
+                    <div class="c-circle__point-inputs">
+                      <div class="c-circle__form-group">
+                        <input
+                          class="c-circle__input"
+                          type="number"
+                          id="circle-resolution"
+                          min="1"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="c-circle__submit" type="submit">
+                  Calcular
+                </button>
+              </form>
+            </div>
+            <div class="c-circle-canvas">
+              <h1 class="c-circle-canvas__title">Resultado</h1>
+              <canvas id="circle-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="js-view" id="srusrd-view">
+          <div class="l-srusrd-container">
+            <div class="c-srusrd">
+              <h1 class="c-srusrd__title">SRU para SRD</h1>
+              <form
+                class="c-srusrd__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="srusrd-form"
+              >
+                <div class="c-srusrd__limit-cards">
+                  <div class="c-srusrd__card c-srusrd__card--limit">
+                    <h2 class="c-srusrd__card-title">SRU</h2>
+                    <div class="c-srusrd__form-row">
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Xmin</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-sruXmin"
+                          required
+                          min="0"
+                          value="0"
+                        />
+                      </div>
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Ymin</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-sruYmin"
+                          required
+                          min="0"
+                          value="0"
+                        />
+                      </div>
+                    </div>
+                    <div class="c-srusrd__form-row">
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Xmáx</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-sruXmax"
+                          required
+                          min="1"
+                          value="10"
+                        />
+                      </div>
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Ymáx</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-sruYmax"
+                          required
+                          min="1"
+                          value="8"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-srusrd__card c-srusrd__card--limit">
+                    <h2 class="c-srusrd__card-title">SRD</h2>
+                    <div class="c-srusrd__form-row">
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Xmin</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-srdXmin"
+                          required
+                          min="0"
+                          value="0"
+                        />
+                      </div>
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Ymin</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-srdYmin"
+                          required
+                          min="0"
+                          value="0"
+                        />
+                      </div>
+                    </div>
+                    <div class="c-srusrd__form-row">
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Xmáx</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-srdXmax"
+                          required
+                          min="1"
+                          value="1024"
+                        />
+                      </div>
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Ymáx</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-srdYmax"
+                          required
+                          min="1"
+                          value="768"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-srusrd__calculate-cards">
+                  <div class="c-srusrd__card">
+                    <h2 class="c-srusrd__card-title">SRU</h2>
+                    <div class="c-srusrd__form-row">
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">X</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-sru-x"
+                          required
+                          min="0"
+                        />
+                      </div>
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Y</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-sru-y"
+                          required
+                          min="0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <button class="c-srusrd__submit" type="submit">
+                    Calcular
+                  </button>
+                  <div class="c-srusrd__card">
+                    <h2 class="c-srusrd__card-title">SRD</h2>
+                    <div class="c-srusrd__form-row">
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">X</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-srd-x"
+                          readonly
+                        />
+                      </div>
+                      <div class="c-srusrd__form-group">
+                        <label class="c-srusrd__form-label">Y</label>
+                        <input
+                          class="c-srusrd__input"
+                          type="number"
+                          id="srusrd-srd-y"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="js-view" id="scale-view">
+          <div class="l-scale-container">
+            <div class="c-scale">
+              <h1 class="c-scale__title">Escala</h1>
+              <form
+                class="c-scale__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="scale-form"
+              >
+                <div class="c-scale__inputs">
+                  <div class="c-scale__card">
+                    <h2 class="c-scale__card-title">Escala (%)</h2>
+                    <div class="c-scale__card-inputs">
+                      <div class="c-scale__form-group">
+                        <label class="c-scale__form-label">X</label>
+                        <input
+                          class="c-scale__input"
+                          type="number"
+                          id="scale-x"
+                          min="1"
+                          value="100"
+                          required
+                        />
+                      </div>
+                      <div class="c-scale__form-group">
+                        <label class="c-scale__form-label">Y</label>
+                        <input
+                          class="c-scale__input"
+                          type="number"
+                          id="scale-y"
+                          min="1"
+                          value="100"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-scale__card">
+                    <h2 class="c-scale__card-title">Resolução</h2>
+                    <div class="c-scale__card-inputs">
+                      <div class="c-scale__form-group">
+                        <input
+                          class="c-scale__input"
+                          type="number"
+                          id="scale-resolution"
+                          min="1"
+                          value="60"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="c-scale__submit" type="submit">
+                  Calcular
+                </button>
+              </form>
+            </div>
+            <div class="c-scale-canvas">
+              <h1 class="c-scale-canvas__title">Resultado</h1>
+              <canvas id="scale-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="js-view" id="translation-view">
+          <div class="l-translation-container">
+            <div class="c-translation">
+              <h1 class="c-translation__title">Translação</h1>
+              <form
+                class="c-translation__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="translation-form"
+              >
+                <div class="c-translation__inputs">
+                  <div class="c-translation__card">
+                    <h2 class="c-translation__card-title">Translação</h2>
+                    <div class="c-translation__card-inputs">
+                      <div class="c-translation__form-group">
+                        <label class="c-translation__form-label">X</label>
+                        <input
+                          class="c-translation__input"
+                          type="number"
+                          id="translation-x"
+                          value="0"
+                          required
+                        />
+                      </div>
+                      <div class="c-translation__form-group">
+                        <label class="c-translation__form-label">Y</label>
+                        <input
+                          class="c-translation__input"
+                          type="number"
+                          id="translation-y"
+                          value="0"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-translation__card">
+                    <h2 class="c-translation__card-title">Resolução</h2>
+                    <div class="c-translation__card-inputs">
+                      <div class="c-translation__form-group">
+                        <input
+                          class="c-translation__input"
+                          type="number"
+                          id="translation-resolution"
+                          min="1"
+                          value="60"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="c-translation__submit" type="submit">
+                  Calcular
+                </button>
+              </form>
+            </div>
+            <div class="c-translation-canvas">
+              <h1 class="c-translation-canvas__title">Resultado</h1>
+              <canvas id="translation-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="js-view" id="rotation-view">
+          <div class="l-rotation-container">
+            <div class="c-rotation">
+              <h1 class="c-rotation__title">Rotação</h1>
+              <form
+                class="c-rotation__form"
+                action="javascript:void(0);"
+                method="POST"
+                id="rotation-form"
+              >
+                <div class="c-rotation__inputs">
+                  <div class="c-rotation__card">
+                    <h2 class="c-rotation__card-title">Ângulo</h2>
+                    <div class="c-rotation__card-inputs">
+                      <div class="c-rotation__form-group">
+                        <input
+                          class="c-rotation__input"
+                          type="number"
+                          id="rotation-angle"
+                          value="0"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-rotation__card">
+                    <h2 class="c-rotation__card-title">Resolução</h2>
+                    <div class="c-rotation__card-inputs">
+                      <div class="c-rotation__form-group">
+                        <input
+                          class="c-rotation__input"
+                          type="number"
+                          id="rotation-resolution"
+                          min="1"
+                          value="60"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="c-rotation__submit" type="submit">
+                  Calcular
+                </button>
+              </form>
+            </div>
+            <div class="c-rotation-canvas">
+              <h1 class="c-rotation-canvas__title">Resultado</h1>
+              <canvas id="rotation-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
